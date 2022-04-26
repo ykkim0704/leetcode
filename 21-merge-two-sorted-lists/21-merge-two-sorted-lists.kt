@@ -13,13 +13,13 @@ class Solution {
         else if(list2 == null) list1
         else {
             if(list1.`val` < list2.`val`) {
-                val list = list1
-                list.next = mergeTwoLists(list1.next, list2)
-                list
+                list1.apply { 
+                    next = mergeTwoLists(list1.next, list2)
+                }
             } else {
-                val list = list2
-                list.next = mergeTwoLists(list1, list2.next)
-                list
+                list2.apply { 
+                    next = mergeTwoLists(list1, list2.next)
+                }
             }
         }
     }
