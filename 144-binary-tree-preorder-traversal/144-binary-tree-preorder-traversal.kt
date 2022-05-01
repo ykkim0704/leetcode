@@ -11,17 +11,17 @@
 class Solution {
     fun preorderTraversal(root: TreeNode?): List<Int> {
         val list = mutableListOf<Int>()
-        if(root != null) {
-            list.add(root.`val`)
-            root.left?.let { 
+        root?.let { rootNode ->
+            list.add(rootNode.`val`)
+            rootNode.left?.let {
                 list.addAll(preorderTraversal(it))
             }
-            
-            root.right?.let {
+
+            rootNode.right?.let {
                 list.addAll(preorderTraversal(it))
             }
         }
-        
+
         return list
     }
 }
