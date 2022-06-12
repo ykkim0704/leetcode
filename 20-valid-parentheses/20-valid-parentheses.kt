@@ -1,36 +1,25 @@
 class Solution {
+    private val mapBrackets = mapOf(
+        ')' to '(',
+        '}' to '{',
+        ']' to '['
+    )
+    
     fun isValid(s: String): Boolean {
-       val stack = mutableListOf<Char>()
+        val stack = Stack<Char>()
 
         s.forEach {
-            when(it) {
-                '(','{','['  -> stack.add(it)
-                ')' -> {
-                    if(stack.lastOrNull() == '(') {
-                        stack.removeAt(stack.lastIndex)
-                    } else  {
-                        return false
-                    }
+            if(mapBrackets.containsValue(it)) {
+                stack.push(it)
+            } else if(mapBrackets.containsKey(it)) {
+                if(stack.isNotEmpty() && mapBrackets[it] == stack.peek()) {
+                    stack.pop()
+                } else {
+                    return false
                 }
-                '}' -> {
-                    if(stack.lastOrNull() == '{') {
-                        stack.removeAt(stack.lastIndex)
-                    } else  {
-                        return false
-                    }
-                }
-                ']' -> {
-                    if(stack.lastOrNull() == '[') {
-                        stack.removeAt(stack.lastIndex)
-                    } else  {
-                        return false
-                    }
-                }
-
-
             }
         }
 
-        return stack.isEmpty() 
+        return stack.isEmpty()
     }
 }
