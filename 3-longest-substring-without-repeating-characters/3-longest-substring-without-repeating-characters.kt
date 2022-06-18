@@ -1,22 +1,19 @@
 class Solution {
     fun lengthOfLongestSubstring(s: String): Int {
-        var repeatCntMax = 0
+        var maxLength = 0
+        val stringBuilder = StringBuilder()
         
-        for(i in s.indices) {
-            val list = mutableListOf(s[i])
-            for(j in (i+1) until s.length) {
-                if(list.contains(s[j])) {
-                    break
-                } else {
-                    list.add(s[j])
-                }
+        for(c in s) {
+            if(c in stringBuilder) {
+                stringBuilder.delete(0, stringBuilder.indexOf(c) + 1)
             }
-
-            if(list.size > repeatCntMax) {
-                repeatCntMax = list.size
+            
+            stringBuilder.append(c)
+            if(stringBuilder.length > maxLength) {
+                maxLength =  stringBuilder.length
             }
         }
-
-        return repeatCntMax
+        
+        return maxLength
     }
 }
